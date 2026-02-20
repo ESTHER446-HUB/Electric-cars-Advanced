@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9vc738jnk90
   // ===== Event Listeners =====
   // 1. Search filter
-  searchInput.addEventListen
+  searchInput.addEventListener("input", e => {
     const query = e.target.value.toLowerCase();
     const filtered = carsData.filter(car =>
       car.name.toLowerCase().includes(query)
@@ -40,7 +40,7 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
   // 3. Favorite button handled dynamically
   carList.addEventListener("click", e => {
     if (e.target.classList.contains("fav-btn")) {
-         const carId = parseInt(e.target.dataset.id);
+      const carId = parseInt(e.target.dataset.id);
       if (favorites.has(carId)) {
         favorites.delete(carId);
       } else {
@@ -61,7 +61,8 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
         <h3>${car.name}</h3>
         <p>Range: ${car.range} miles</p>
         <p>Price: $${car.price.toLocaleString()}</p>
-             ${favorites.has(car.id) ? "Favorited" : "Add to Favorites"}
+        <button class="fav-btn" data-id="${car.id}">
+          ${favorites.has(car.id) ? "Favorited" : "Add to Favorites"}
         </button>
       `;
       carList.appendChild(card);
