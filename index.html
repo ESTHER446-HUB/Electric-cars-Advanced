@@ -4,71 +4,49 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   
-  <!-- SEO Meta Tags -->
   <meta name="description" content="Explore the best electric cars. Compare prices, range, and features of top EVs. Find your perfect electric vehicle today.">
   <meta name="keywords" content="electric cars, EV, electric vehicles, Tesla, car comparison, eco-friendly cars">
   <meta name="author" content="Electric Cars Explorer">
   
-  <!-- Open Graph Meta Tags for Social Media Sharing -->
   <meta property="og:title" content="Electric Cars Explorer - Find Your Perfect EV">
   <meta property="og:description" content="Compare and explore the best electric cars. Search by price, range, and features.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yourwebsite.com">
   
-  <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Electric Cars Explorer">
   <meta name="twitter:description" content="Explore and compare the best electric vehicles.">
   
   <title>Electric Cars Explorer - Compare EVs by Price & Range</title>
   
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  
-  <!-- Link to our external stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Main page heading -->
   <h1>ALL ABOUT ELECTRIC CARS</h1>
 
-  <!-- Search and sort controls -->
   <div class="controls">
     <input id="search" type="text" placeholder="Search cars...">
     <select id="sort">
       <option value="">Sort by</option>
-      <option value="price">Price (Low -High)</option>
-      <option value="range">Range (High -Low)</option>
-      <option value="speed">speed (High-low>)</option>
+      <option value="price">Price (Low - High)</option>
+      <option value="range">Range (High - Low)</option>
     </select>
   </div>
 
-  <!-- Loading message shown while fetching data -->
   <div id="loading">Loading cars...</div>
-
-  <!-- Message shown when no cars match the search -->
   <div id="empty-state" class="hidden">No cars found. Try a different search!</div>
-
-  <!-- Container where car cards will be dynamically added by JavaScript -->
   <div id="car-list"></div>
 
-  <!-- Modal popup for showing detailed car information -->
   <div id="car-modal" class="modal hidden">
-    <!-- Dark overlay background -->
     <div class="modal-overlay"></div>
-    
-    <!-- Modal content box -->
     <div class="modal-content">
-      <!-- Close button -->
       <button class="modal-close">&times;</button>
-      
-      <!-- Car details will be inserted here by JavaScript -->
       <div id="modal-body"></div>
     </div>
   </div>
 
-  <!-- Footer section -->
   <footer>
     <div class="footer-content">
       <p>&copy; 2025 Electric Cars Explorer. All rights reserved.</p>
@@ -81,7 +59,6 @@
     </div>
   </footer>
 
-  <!-- Link to our JavaScript file -->
   <script src="script.js"></script>
 
 </body>
