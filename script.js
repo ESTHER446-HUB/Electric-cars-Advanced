@@ -40,3 +40,24 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
   // 3. Favorite button handled dynamically
   carList.addEventListener("click", e => {
     if (e.target.classList.contains("fav-btn")) {
+         const carId = parseInt(e.target.dataset.id);
+      if (favorites.has(carId)) {
+        favorites.delete(carId);
+      } else {
+        favorites.add(carId);
+      }
+      renderCars(carsData);
+    }
+  });
+
+  // ===== Helper Functions =====
+  function renderCars(cars) {
+    carList.innerHTML = "";
+    cars.forEach(car => {
+      const card = document.createElement("div");
+      card.className = "car-card";
+      card.innerHTML = `
+        <img src="${car.image}" alt="${car.name}" class="car-img">
+        <h3>${car.name}</h3>
+        <p>Range: ${car.range} miles</p>
+        <p>Price: $${car.price.toLocaleString()}</p>
