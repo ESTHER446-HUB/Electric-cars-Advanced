@@ -34,13 +34,21 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
   // ===== Event Listeners =====
   
   // 1. Search filter - runs every time user types in the search box
+  // We use debouncing to wait until user stops typing before searching
+  let searchTimeout;
   searchInput.addEventListener("input", e => {
-    const query = e.target.value.toLowerCase();
-    // Filter cars to only show ones that match the search query
-    const filtered = carsData.filter(car =>
-      car.name.toLowerCase().includes(query)
-    );
-    renderCars(filtered);
+    // Clear any existing timeout
+    clearTimeout(searchTimeout);
+    
+    // Wait 300ms after user stops typing before actually searching
+    searchTimeout = setTimeout(() => {
+      const query = e.target.value.toLowerCase();
+      // Filter cars to only show ones that match the search query
+      const filtered = carsData.filter(car =>
+        car.name.toLowerCase().includes(query)
+      );
+      renderCars(filtered);
+    }, 300);
   });
 
   // 2. Sort dropdown - runs when user selects a sorting option
