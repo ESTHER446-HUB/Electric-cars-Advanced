@@ -19,3 +19,24 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
   // ===== Event Listeners =====
   // 1. Search filter
   searchInput.addEventListen
+    const query = e.target.value.toLowerCase();
+    const filtered = carsData.filter(car =>
+      car.name.toLowerCase().includes(query)
+    );
+    renderCars(filtered);
+  });
+
+  // 2. Sort dropdown
+  sortSelect.addEventListener("change", e => {
+    let sorted = [...carsData];
+    if (e.target.value === "price") {
+      sorted.sort((a, b) => a.price - b.price);
+    } else if (e.target.value === "range") {
+      sorted.sort((a, b) => b.range - a.range);
+    }
+    renderCars(sorted);
+  });
+
+  // 3. Favorite button handled dynamically
+  carList.addEventListener("click", e => {
+    if (e.target.classList.contains("fav-btn")) {
