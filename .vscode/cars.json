@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Tesla Model 3",
+    "range": "358 miles",
+    "price": "$39,990",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/58/Tesla_Model_3_parked%2C_front_driver_side.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Nissan Leaf",
+    "range": "226 miles",
+    "price": "$28,040",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/bb/2018_Nissan_Leaf_Tekna_Front.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Chevrolet Bolt EV",
+    "range": "259 miles",
+    "price": "$31,000",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Chevrolet_Bolt_EV_2017.jpg"
+  },
+  {
+    "id": 4,
+    "name": "BMW i3",
+    "range": "153 miles",
+    "price": "$80,450",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/cd/2018_BMW_i3s_BEV_Front.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Hyundai Kona Electric",
+    "range": "258 miles",
+    "price": "$37,390",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/0d/2019_Hyundai_Kona_Electric.jpg"
+  }
+]
