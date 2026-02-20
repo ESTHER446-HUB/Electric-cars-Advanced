@@ -66,3 +66,19 @@ h1 {
 .fav-btn:hover {
   background-color: brown;
 }
+
+#loading {
+  color: palevioletred;
+  font-size: 20px;
+  margin: 40px 0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+#loading.hidden {
+  display: none;
+}

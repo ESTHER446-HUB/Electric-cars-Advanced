@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const carList = document.getElementById("car-list");
   const searchInput = document.getElementById("search");
   const sortSelect = document.getElementById("sort");
+  const loading = document.getElementById("loading");
 
   let carsData = [];
   let favorites = new Set(JSON.parse(localStorage.getItem('favorites') || '[]'));
@@ -12,9 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(res => res.json())
     .then(data => {
       carsData = data;
+      loading.classList.add('hidden');
       renderCars(carsData);
     })
-    .catch(err => console.error("Error fetching cars:", err));
+    .catch(err => {
+      console.error("Error fetching cars:", err);
+      loading.textContent = "Error loading cars. Please refresh.";
+    });
 https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9vc738jnk90
   // ===== Event Listeners =====
   // 1. Search filter
