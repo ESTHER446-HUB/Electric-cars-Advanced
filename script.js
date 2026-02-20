@@ -8,6 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const sortSelect = document.getElementById("sort");
   const loading = document.getElementById("loading");
   const emptyState = document.getElementById("empty-state");
+  const modal = document.getElementById("car-modal");
+  const modalBody = document.getElementById("modal-body");
+  const modalClose = document.querySelector(".modal-close");
+  const modalOverlay = document.querySelector(".modal-overlay");
 
   // Store all car data here once we fetch it
   let carsData = [];
@@ -68,6 +72,7 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
   // 3. Favorite button - we use event delegation here
   // Instead of adding a listener to each button, we listen on the parent container
   carList.addEventListener("click", e => {
+    // Check if favorite button was clicked
     if (e.target.classList.contains("fav-btn")) {
       const carId = parseInt(e.target.dataset.id);
       
@@ -82,6 +87,22 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
       localStorage.setItem('favorites', JSON.stringify([...favorites]));
       renderCars(carsData);
     }
+    
+    // Check if a car card was clicked (but not the favorite button)
+    if (e.target.closest('.car-card') && !e.target.classList.contains('fav-btn')) {
+      const carId = parseInt(e.target.closest('.car-card').dataset.id);
+      showCarDetails(carId);
+    }
+  });
+
+  // 4. Close modal when clicking the X button
+  modalClose.addEventListener("click", () => {
+    modal.classList.add('hidden');
+  });
+
+  // 5. Close modal when clicking outside the content (on the dark overlay)
+  modalOverlay.addEventListener("click", () => {
+    modal.classList.add('hidden');
   });
 
   // ===== Helper Functions =====
@@ -103,6 +124,7 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
     cars.forEach(car => {
       const card = document.createElement("div");
       card.className = "car-card";
+      card.dataset.id = car.id; // Store car ID for click handling
       
       // Build the HTML for this car card
       card.innerHTML = `
@@ -118,5 +140,30 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
       // Add this card to the page
       carList.appendChild(card);
     });
+  }
+
+  // Show detailed information about a specific car in the modal
+  function showCarDetails(carId) {
+    // Find the car data by ID
+    const car = carsData.find(c => c.id === carId);
+    if (!car) return; // Exit if car not found
+    
+    // Build the detailed view HTML
+    modalBody.innerHTML = `
+      <h2>${car.name}</h2>
+      <img src="${car.image}" alt="${car.name}">
+      <p><strong>Range:</strong> ${car.range} miles</p>
+      <p><strong>Price:</strong> $${car.price.toLocaleString()}</p>
+      <p><strong>Top Speed:</strong> ${car.topSpeed || 'N/A'} mph</p>
+      <p><strong>Battery:</strong> ${car.battery || 'N/A'} kWh</p>
+      <p><strong>Seats:</strong> ${car.seats || 'N/A'}</p>
+      <p><strong>Description:</strong> ${car.description || 'No description available.'}</p>
+      <button class="fav-btn" data-id="${car.id}">
+        ${favorites.has(car.id) ? "Favorited" : "Add to Favorites"}
+      </button>
+    `;
+    
+    // Show the modal
+    modal.classList.remove('hidden');
   }
 });

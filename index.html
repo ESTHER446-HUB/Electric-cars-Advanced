@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ALL ABOUT ELECRIC CARS</title>
+  <title>ELECTRIC CARS</title>
   <!-- Link to our external stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- Main page heading -->
-  <h1>ALL ABOUT ELECRIC CARS</h1>
+  <h1>ALL ABOUT ELECTRIC CARS</h1>
 
   <!-- Search and sort controls -->
   <div class="controls">
@@ -31,6 +31,21 @@
 
   <!-- Container where car cards will be dynamically added by JavaScript -->
   <div id="car-list"></div>
+
+  <!-- Modal popup for showing detailed car information -->
+  <div id="car-modal" class="modal hidden">
+    <!-- Dark overlay background -->
+    <div class="modal-overlay"></div>
+    
+    <!-- Modal content box -->
+    <div class="modal-content">
+      <!-- Close button -->
+      <button class="modal-close">&times;</button>
+      
+      <!-- Car details will be inserted here by JavaScript -->
+      <div id="modal-body"></div>
+    </div>
+  </div>
 
   <!-- Link to our JavaScript file -->
   <script src="script.js"></script>
