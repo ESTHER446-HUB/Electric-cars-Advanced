@@ -61,3 +61,10 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
         <h3>${car.name}</h3>
         <p>Range: ${car.range} miles</p>
         <p>Price: $${car.price.toLocaleString()}</p>
+             ${favorites.has(car.id) ? "Favorited" : "Add to Favorites"}
+        </button>
+      `;
+      carList.appendChild(card);
+    });
+  }
+});
