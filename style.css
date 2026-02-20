@@ -1,5 +1,6 @@
 /* EV Explorer Styles */
 
+/* Main page styling */
 body {
   font-family: Arial, sans-serif;
   background: black;
@@ -8,15 +9,18 @@ body {
   text-align: center;
 }
 
+/* Page title */
 h1 {
   color: palevioletred;
   background-color: black;
 }
 
+/* Search and sort controls container */
 .controls {
   margin-bottom: 20px;
 }
 
+/* Style for search input and sort dropdown */
 #search, #sort {
   padding: 8px;
   margin: 5px;
@@ -24,6 +28,7 @@ h1 {
   color: red;
 }
 
+/* Container for all car cards - uses flexbox for responsive layout */
 #car-list {
   display: flex;
   flex-wrap: wrap;
@@ -31,6 +36,7 @@ h1 {
   gap: 20px;
 }
 
+/* Individual car card styling */
 .car-card {
   background: #fff;
   width: 260px;
@@ -40,10 +46,12 @@ h1 {
   transition: transform 0.2s ease;
 }
 
+/* Lift card slightly when user hovers over it */
 .car-card:hover {
   transform: translateY(-3px);
 }
 
+/* Car image styling */
 .car-img {
   width: 100%;
   height: 160px;
@@ -51,6 +59,7 @@ h1 {
   border-radius: 8px;
 }
 
+/* Favorite button styling */
 .fav-btn {
   margin-top: 10px;
   padding: 8px 14px;
@@ -63,10 +72,12 @@ h1 {
   transition: background 0.2s;
 }
 
+/* Change button color when hovering */
 .fav-btn:hover {
   background-color: brown;
 }
 
+/* Loading spinner text */
 #loading {
   color: palevioletred;
   font-size: 20px;
@@ -74,11 +85,13 @@ h1 {
   animation: pulse 1.5s ease-in-out infinite;
 }
 
+/* Pulse animation - fades in and out repeatedly */
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
 
+/* Hide loading spinner when data is loaded */
 #loading.hidden {
   display: none;
 }

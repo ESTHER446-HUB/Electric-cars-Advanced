@@ -4,12 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ALL ABOUT ELECRIC CARS</title>
+  <!-- Link to our external stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- Main page heading -->
   <h1>ALL ABOUT ELECRIC CARS</h1>
 
+  <!-- Search and sort controls -->
   <div class="controls">
     <input id="search" type="text" placeholder="Search cars...">
     <select id="sort">
@@ -20,12 +23,13 @@
     </select>
   </div>
 
-  <!-- Loading spinner -->
+  <!-- Loading message shown while fetching data -->
   <div id="loading">Loading cars...</div>
 
-  <!-- Car cards will be dynamically injected here -->
+  <!-- Container where car cards will be dynamically added by JavaScript -->
   <div id="car-list"></div>
 
+  <!-- Link to our JavaScript file -->
   <script src="script.js"></script>
 
 </body>
