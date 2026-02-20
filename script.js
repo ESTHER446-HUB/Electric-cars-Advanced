@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sortSelect = document.getElementById("sort");
 
   let carsData = [];
-  let favorites = new Set();
+  let favorites = new Set(JSON.parse(localStorage.getItem('favorites') || '[]'));
 
   // Fetch car data from local JSON or public API
   fetch("./cars.json")
@@ -46,6 +46,7 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
       } else {
         favorites.add(carId);
       }
+      localStorage.setItem('favorites', JSON.stringify([...favorites]));
       renderCars(carsData);
     }
   });
