@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("search");
   const sortSelect = document.getElementById("sort");
   const loading = document.getElementById("loading");
+  const emptyState = document.getElementById("empty-state");
 
   // Store all car data here once we fetch it
   let carsData = [];
@@ -80,6 +81,15 @@ https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9
   // This function takes an array of cars and displays them on the page
   function renderCars(cars) {
     carList.innerHTML = ""; // Clear out any existing cards first
+    
+    // Check if there are no cars to display
+    if (cars.length === 0) {
+      emptyState.classList.remove('hidden'); // Show the "no results" message
+      return; // Exit early since there's nothing to render
+    }
+    
+    // If we have cars, make sure the empty state is hidden
+    emptyState.classList.add('hidden');
     
     // Loop through each car and create a card for it
     cars.forEach(car => {

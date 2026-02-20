@@ -95,3 +95,15 @@ h1 {
 #loading.hidden {
   display: none;
 }
+
+/* Empty state message when no search results */
+#empty-state {
+  color: palevioletred;
+  font-size: 18px;
+  margin: 40px 0;
+}
+
+/* Hide empty state by default */
+#empty-state.hidden {
+  display: none;
+}
