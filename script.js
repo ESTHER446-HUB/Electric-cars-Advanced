@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <img src="${car.image}" alt="${car.name}" class="car-img">
         <h3>${car.name}</h3>
         <p>Range: ${car.range} miles</p>
-        <p>Price: $${car.price.toLocaleString()}</p>
+        <p>Price: KSh ${car.price.toLocaleString()}</p>
         <button class="fav-btn" data-id="${car.id}">
           ${favorites.has(car.id) ? "Favorited" : "Add to Favorites"}
         </button>
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <h2>${car.name}</h2>
       <img src="${car.image}" alt="${car.name}">
       <p><strong>Range:</strong> ${car.range} miles</p>
-      <p><strong>Price:</strong> $${car.price.toLocaleString()}</p>
+      <p><strong>Price:</strong> KSh ${car.price.toLocaleString()}</p>
       <p><strong>Top Speed:</strong> ${car.topSpeed || 'N/A'} mph</p>
       <p><strong>Battery:</strong> ${car.battery || 'N/A'} kWh</p>
       <p><strong>Seats:</strong> ${car.seats || 'N/A'}</p>
