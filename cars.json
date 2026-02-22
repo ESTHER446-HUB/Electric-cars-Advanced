@@ -53,5 +53,115 @@
     "seats": 5,
     "description": "The Hyundai Kona Electric is a subcompact crossover SUV. It offers impressive range and practicality in a compact package.",
     "image": "https://upload.wikimedia.org/wikipedia/commons/0/0d/2019_Hyundai_Kona_Electric.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Tesla Model S",
+    "range": 405,
+    "price": 94990,
+    "topSpeed": 155,
+    "battery": 100,
+    "seats": 5,
+    "description": "The Tesla Model S is a luxury all-electric sedan with incredible performance and the longest range of any EV on the market.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Tesla_Model_S_in_Lysaker%2C_Norway.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Tesla Model X",
+    "range": 348,
+    "price": 99990,
+    "topSpeed": 155,
+    "battery": 100,
+    "seats": 7,
+    "description": "The Tesla Model X is a mid-size luxury crossover SUV with distinctive falcon-wing doors and seating for up to seven adults.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/92/Tesla_Model_X_P90D.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Audi e-tron",
+    "range": 222,
+    "price": 65900,
+    "topSpeed": 124,
+    "battery": 95,
+    "seats": 5,
+    "description": "The Audi e-tron is a luxury electric SUV that combines Audi's premium quality with cutting-edge electric technology.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Audi_e-tron_55_quattro.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Porsche Taycan",
+    "range": 227,
+    "price": 82700,
+    "topSpeed": 161,
+    "battery": 79,
+    "seats": 4,
+    "description": "The Porsche Taycan is a high-performance electric sports sedan that delivers the legendary Porsche driving experience with zero emissions.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Porsche_Taycan_4S_IMG_4188.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Ford Mustang Mach-E",
+    "range": 305,
+    "price": 42895,
+    "topSpeed": 111,
+    "battery": 88,
+    "seats": 5,
+    "description": "The Ford Mustang Mach-E is an all-electric SUV inspired by the legendary Mustang, offering style, performance, and practicality.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/8b/2021_Ford_Mustang_Mach-E.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Volkswagen ID.4",
+    "range": 275,
+    "price": 38995,
+    "topSpeed": 99,
+    "battery": 82,
+    "seats": 5,
+    "description": "The Volkswagen ID.4 is a compact electric SUV that offers spacious interior, modern technology, and excellent value for money.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d5/VW_ID.4_1st_Edition_IMG_3997.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Rivian R1T",
+    "range": 314,
+    "price": 73000,
+    "topSpeed": 125,
+    "battery": 135,
+    "seats": 5,
+    "description": "The Rivian R1T is an all-electric adventure pickup truck designed for both on-road comfort and off-road capability.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Rivian_R1T_front_view.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Lucid Air",
+    "range": 516,
+    "price": 87400,
+    "topSpeed": 168,
+    "battery": 118,
+    "seats": 5,
+    "description": "The Lucid Air is a luxury electric sedan with the longest range of any EV, combining stunning design with cutting-edge technology.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Lucid_Air_Dream_Edition.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Polestar 2",
+    "range": 270,
+    "price": 45900,
+    "topSpeed": 127,
+    "battery": 78,
+    "seats": 5,
+    "description": "The Polestar 2 is a premium electric fastback that combines Scandinavian design with Google-powered infotainment.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Polestar_2_Genf_2019_1Y7A5845.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Kia EV6",
+    "range": 310,
+    "price": 40900,
+    "topSpeed": 115,
+    "battery": 77,
+    "seats": 5,
+    "description": "The Kia EV6 is a stylish electric crossover with impressive performance, fast charging capability, and a spacious interior.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Kia_EV6_IMG_4333.jpg"
   }
 ]
