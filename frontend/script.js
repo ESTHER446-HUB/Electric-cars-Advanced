@@ -28,14 +28,198 @@ document.addEventListener("DOMContentLoaded", () => {
   const authError = document.getElementById("auth-error");
   const mainContent = document.getElementById("main-content");
 
+  const navLinks = document.querySelectorAll(".nav-link");
+  const homePage = document.getElementById("home-page");
+  const favoritesPage = document.getElementById("favorites-page");
+  const comparePage = document.getElementById("compare-page");
+  const profilePage = document.getElementById("profile-page");
+  const favoritesList = document.getElementById("favorites-list");
+  const favoritesEmpty = document.getElementById("favorites-empty");
+  const compareCarsList = document.getElementById("compare-cars-list");
+  const comparisonTable = document.getElementById("comparison-table");
+  const profileInfo = document.getElementById("profile-info");
+
   let carsData = [];
   let favorites = new Set(JSON.parse(localStorage.getItem('favorites') || '[]'));
   let token = localStorage.getItem('token');
   let currentUser = JSON.parse(localStorage.getItem('user') || 'null');
   let isLoginMode = true;
+  let selectedForComparison = new Set();
 
   updateAuthUI();
   checkAuthentication();
+  setupNavigation();
+
+  function setupNavigation() {
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.dataset.page;
+        
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        
+        [homePage, favoritesPage, comparePage, profilePage].forEach(p => p.classList.add('hidden'));
+        
+        if (page === 'home') {
+          homePage.classList.remove('hidden');
+        } else if (page === 'favorites') {
+          favoritesPage.classList.remove('hidden');
+          loadFavoritesPage();
+        } else if (page === 'compare') {
+          comparePage.classList.remove('hidden');
+          loadComparePage();
+        } else if (page === 'profile') {
+          profilePage.classList.remove('hidden');
+          loadProfilePage();
+        }
+      });
+    });
+  }
+
+  function loadFavoritesPage() {
+    const favCars = carsData.filter(car => favorites.has(car.id));
+    
+    if (favCars.length === 0) {
+      favoritesList.innerHTML = '';
+      favoritesEmpty.classList.remove('hidden');
+      return;
+    }
+    
+    favoritesEmpty.classList.add('hidden');
+    favoritesList.innerHTML = '';
+    
+    favCars.forEach(car => {
+      const card = document.createElement('div');
+      card.className = 'car-card';
+      card.innerHTML = `
+        <img src="${car.image}" alt="${car.name}" class="car-img">
+        <h3>${car.name}</h3>
+        <p>Range: ${car.range} miles</p>
+        <p>Price: KSh ${car.price.toLocaleString()}</p>
+        <button class="fav-btn" data-id="${car.id}">Remove</button>
+      `;
+      
+      card.querySelector('.fav-btn').addEventListener('click', () => {
+        if (token) toggleFavoriteAPI(car.id);
+        setTimeout(loadFavoritesPage, 300);
+      });
+      
+      card.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('fav-btn')) showCarDetails(car.id);
+      });
+      
+      favoritesList.appendChild(card);
+    });
+  }
+
+  function loadComparePage() {
+    compareCarsList.innerHTML = '';
+    comparisonTable.classList.add('hidden');
+    
+    carsData.forEach(car => {
+      const card = document.createElement('div');
+      card.className = 'car-card';
+      card.innerHTML = `
+        <img src="${car.image}" alt="${car.name}" class="car-img">
+        <h3>${car.name}</h3>
+        <p>Range: ${car.range} miles</p>
+        <p>Price: KSh ${car.price.toLocaleString()}</p>
+        <label class="compare-checkbox">
+          <input type="checkbox" ${selectedForComparison.has(car.id) ? 'checked' : ''} data-id="${car.id}">
+          Select to Compare
+        </label>
+      `;
+      
+      card.querySelector('input[type="checkbox"]').addEventListener('change', (e) => {
+        const carId = parseInt(e.target.dataset.id);
+        if (e.target.checked) {
+          if (selectedForComparison.size < 3) {
+            selectedForComparison.add(carId);
+          } else {
+            e.target.checked = false;
+            alert('You can compare up to 3 cars only');
+          }
+        } else {
+          selectedForComparison.delete(carId);
+        }
+        updateComparisonButton();
+      });
+      
+      compareCarsList.appendChild(card);
+    });
+    
+    updateComparisonButton();
+  }
+
+  function updateComparisonButton() {
+    let btn = document.getElementById('compare-action-btn');
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.id = 'compare-action-btn';
+      btn.className = 'compare-btn';
+      document.getElementById('compare-selection').appendChild(btn);
+    }
+    
+    if (selectedForComparison.size >= 2) {
+      btn.textContent = `Compare ${selectedForComparison.size} Cars`;
+      btn.style.display = 'block';
+      btn.onclick = showComparison;
+    } else {
+      btn.style.display = 'none';
+    }
+  }
+
+  function showComparison() {
+    const selectedCars = carsData.filter(car => selectedForComparison.has(car.id));
+    
+    const fields = ['Image', 'Name', 'Price (KSh)', 'Range (miles)', 'Top Speed (mph)', 'Battery (kWh)', 'Seats'];
+    
+    let html = '<div class="comparison-grid">';
+    
+    fields.forEach(field => {
+      html += `<div class="comparison-cell header">${field}</div>`;
+      selectedCars.forEach(car => {
+        let value = '';
+        if (field === 'Image') value = `<img src="${car.image}" alt="${car.name}">`;
+        else if (field === 'Name') value = car.name;
+        else if (field === 'Price (KSh)') value = car.price.toLocaleString();
+        else if (field === 'Range (miles)') value = car.range;
+        else if (field === 'Top Speed (mph)') value = car.topSpeed || 'N/A';
+        else if (field === 'Battery (kWh)') value = car.battery || 'N/A';
+        else if (field === 'Seats') value = car.seats || 'N/A';
+        
+        html += `<div class="comparison-cell">${value}</div>`;
+      });
+    });
+    
+    html += '</div>';
+    comparisonTable.innerHTML = html;
+    comparisonTable.classList.remove('hidden');
+  }
+
+  function loadProfilePage() {
+    if (!currentUser) return;
+    
+    profileInfo.innerHTML = `
+      <div class="profile-field">
+        <label>Username</label>
+        <input type="text" value="${currentUser.username}" readonly>
+      </div>
+      <div class="profile-field">
+        <label>Email</label>
+        <input type="email" value="${currentUser.email}" readonly>
+      </div>
+      <div class="profile-field">
+        <label>Member Since</label>
+        <input type="text" value="${new Date(currentUser.created_at || Date.now()).toLocaleDateString()}" readonly>
+      </div>
+      <div class="profile-field">
+        <label>Total Favorites</label>
+        <input type="text" value="${favorites.size}" readonly>
+      </div>
+    `;
+  }
 
   function checkAuthentication() {
     if (!token || !currentUser) {
