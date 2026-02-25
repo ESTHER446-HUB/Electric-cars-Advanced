@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const authPassword = document.getElementById("auth-password");
   const authSubmit = document.getElementById("auth-submit");
   const authError = document.getElementById("auth-error");
+  const mainContent = document.getElementById("main-content");
 
   let carsData = [];
   let favorites = new Set(JSON.parse(localStorage.getItem('favorites') || '[]'));
@@ -34,8 +35,24 @@ document.addEventListener("DOMContentLoaded", () => {
   let isLoginMode = true;
 
   updateAuthUI();
+  checkAuthentication();
 
-  fetch(`${API_URL}/cars`)
+  function checkAuthentication() {
+    if (!token || !currentUser) {
+      mainContent.style.display = 'none';
+      authModal.classList.remove('hidden');
+      isLoginMode = true;
+      authTitle.textContent = 'Login Required';
+      authUsername.style.display = 'none';
+      authSubmit.textContent = 'Login';
+    } else {
+      mainContent.style.display = 'block';
+      loadCars();
+    }
+  }
+
+  function loadCars() {
+    fetch(`${API_URL}/cars`)
     .then(res => res.json())
     .then(data => {
       carsData = data;
@@ -47,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error fetching cars:", err);
       loading.textContent = "Error loading cars. Please refresh.";
     });
+  }
   // Search with debouncing
   let searchTimeout;
   searchInput.addEventListener("input", e => {
@@ -178,6 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
       authUsername.value = '';
       
       updateAuthUI();
+      mainContent.style.display = 'block';
+      loadCars();
       loadFavoritesFromAPI();
     } catch (err) {
       authError.textContent = 'Network error. Please try again.';
