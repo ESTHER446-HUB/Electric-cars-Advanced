@@ -26,6 +26,17 @@
 
   <h1>ALL ABOUT ELECTRIC CARS</h1>
 
+  <div class="auth-section">
+    <div id="auth-buttons">
+      <button id="login-btn" class="auth-btn">Login</button>
+      <button id="register-btn" class="auth-btn">Register</button>
+    </div>
+    <div id="user-info" class="hidden">
+      <span id="username-display"></span>
+      <button id="logout-btn" class="auth-btn">Logout</button>
+    </div>
+  </div>
+
   <div class="controls">
     <input id="search" type="text" placeholder="Search cars...">
     <select id="sort">
@@ -44,6 +55,21 @@
     <div class="modal-content">
       <button class="modal-close">&times;</button>
       <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="auth-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div id="auth-form">
+        <h2 id="auth-title">Login</h2>
+        <input type="text" id="auth-username" placeholder="Username" class="auth-input">
+        <input type="email" id="auth-email" placeholder="Email" class="auth-input">
+        <input type="password" id="auth-password" placeholder="Password" class="auth-input">
+        <button id="auth-submit" class="auth-btn">Submit</button>
+        <p id="auth-error" class="hidden"></p>
+      </div>
     </div>
   </div>
 

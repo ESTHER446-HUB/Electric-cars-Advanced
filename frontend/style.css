@@ -21,7 +21,7 @@ h1 {
   padding: 8px;
   margin: 5px;
   font-size: 16px;
-  color: #000;
+  color: palevioletred;
 }
 
 #car-list {
@@ -165,6 +165,60 @@ h1 {
   color: #666;
   line-height: 1.6;
   margin: 10px 0;
+}
+
+.auth-section {
+  margin: 20px 0;
+}
+
+.auth-btn {
+  padding: 8px 16px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 6px;
+  background-color: palevioletred;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.auth-btn:hover {
+  background-color: #c71585;
+}
+
+#user-info {
+  color: palevioletred;
+  font-size: 16px;
+}
+
+#username-display {
+  margin-right: 10px;
+}
+
+.auth-input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+#auth-form h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#auth-error {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
 }
 
 /* Responsive Design */

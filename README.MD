@@ -1,136 +1,93 @@
+# Electric Cars Explorer
 
-Electric Cars Web App
+A full-stack web application for browsing electric vehicles with user authentication and favorites management.
 
-A simple JavaScript-based web application that displays a list of electric cars by fetching live data from a public API.
-The project demonstrates the three pillars of JavaScript:
+## Features
 
-Handling Events
+- Browse 15 electric cars with detailed specifications
+- Real-time search and sorting
+- User authentication (register/login)
+- Save favorite cars
+- Responsive design for all devices
+- Prices in Kenyan Shillings (KES)
 
-Manipulating the DOM
+## Tech Stack
 
-Communicating with a Server (using Fetch API)
+**Frontend:** HTML5, CSS3, JavaScript (ES6+)  
+**Backend:** Node.js, Express, SQLite3, JWT
 
-This project also includes basic styling, error handling, and a clean user interface.
+## Project Structure
 
-Author: Esther – Sept 2025
+```
+Electric-cars-Advanced/
+├── frontend/          # Frontend application
+│   ├── index.html
+│   ├── style.css
+│   ├── script.js
+│   ├── cars.json
+│   └── favicon.svg
+├── backend/           # Backend API
+│   ├── routes/
+│   ├── middleware/
+│   ├── server.js
+│   ├── database.js
+│   └── package.json
+└── README.MD
+```
 
-Table of Contents
+## Installation
 
-Features
+### Backend Setup
+```bash
+cd backend
+npm install
+npm start
+```
+Server runs on: http://localhost:5000
 
-Live Preview
+### Frontend Setup
+```bash
+cd frontend
+python3 -m http.server 8000
+```
+Frontend runs on: http://localhost:8000
 
-Requirements
+Or simply open `frontend/index.html` in your browser.
 
-Installation
+## API Endpoints
 
-Usage
+### Cars
+- `GET /api/cars` - Get all cars
+- `GET /api/cars/:id` - Get single car
 
-API Documentation
-This API has been documented on Render 
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
 
-Testing
+### Favorites (Protected)
+- `GET /api/favorites` - Get user favorites
+- `POST /api/favorites/:carId` - Add to favorites
+- `DELETE /api/favorites/:carId` - Remove from favorites
 
-Contributing
+## Author
 
-License
+Esther Kuria  
+Email: Esther.kuria@student.moringaschool.com  
+GitHub: https://github.com/ESTHER446-HUB
 
-Contact Information
-
-Features
-
-Fetches a list of electric cars from an external API.
-
-Displays car details (name, model, range, and price) dynamically in the browser.
-
-Responsive design with clean CSS styling.
-
-Handles basic errors (e.g., failed fetch requests).
-
-Organized code structure for easy maintenance.
-You can view the live project here
-Electric cars
-Live Preview https://app.netlify.com/projects/delightful-truffle-f71b97/deploys/68d6e0fa320cd736f73f5326
-
-https://dashboard.render.com/web/srv-d3bekiali9vc738jnk00/deploys/dep-d3bekiqli9vc738jnk90 .id
-
-
-Requirements
-
-To run this project locally, you need:
-
-A web browser (Chrome, Firefox, Edge, etc.)
-
-Internet connection (to access the API)
-
-Git (optional, for cloning the repo)
-
-Installation
-
-Clone the repository:
-
-git clone https://github.com/ESTHER446-HUB/ELECTRIC-CARS.git
-cd Electric-Cars
-
-
-Open the project folder and launch index.html in your browser:
-
-On Windows: double-click index.html.
-
-On Mac/Linux: right-click and choose Open With Browser.
-
-Usage
-
-Once opened, the page will automatically fetch data from the electric cars API.
-
-Scroll through the list to view different car models and details.
-
-The layout adjusts for mobile and desktop screens.
-
-API Documentation
-
-Returns data in JSON format with car name, model, range, and price.
-
-Testing
-
-No special testing is required.
-To verify functionality:
-
-Open index.html in a browser.
-
-Check that electric car data loads correctly.
-
-Disconnect the internet to test the error message.
-
-Contributing
-
-Contributions are welcome!
-
-Create a new branch:
-
-git checkout -b improve-feature
-
-
-Make your changes and commit:
-
-git commit -am "Improve UI or add feature"
-
-
-Push to the branch:
-
-git push origin improve-feature
-
-
-Open a pull request on GitHub.
-
-License
+## License
 
 MIT License
-Copyright (c) 2025 Esther
 
-Contact Information
+---
 
-For questions or feedback:
-Email: Esther.kuria@student.moringaschool.com
+## Deployment
 
-🔗 GitHub: https://github.com/ESTHER446-HUB
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+
+**Quick Deploy:**
+1. Backend → Render.com
+2. Frontend → Netlify.com
+3. Update API URL in `frontend/script.js`
+
+**Live Demo:** [Add your deployed URL here]
