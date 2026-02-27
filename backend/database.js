@@ -26,6 +26,9 @@ db.serialize(() => {
       topSpeed INTEGER,
       battery INTEGER,
       seats INTEGER,
+      acceleration REAL,
+      chargingTime TEXT,
+      warranty TEXT,
       description TEXT,
       image TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -42,6 +45,20 @@ db.serialize(() => {
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
       FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE,
       UNIQUE(user_id, car_id)
+    )
+  `);
+
+  // Reviews table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS reviews (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      car_id INTEGER NOT NULL,
+      rating INTEGER NOT NULL CHECK(rating >= 1 AND rating <= 5),
+      comment TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE
     )
   `);
 

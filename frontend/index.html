@@ -32,6 +32,7 @@
     <a href="#" class="nav-link" data-page="favorites">My Favorites</a>
     <a href="#" class="nav-link" data-page="compare">Compare</a>
     <a href="#" class="nav-link" data-page="profile">Profile</a>
+    <a href="#" class="nav-link" data-page="contact">Contact</a>
   </nav>
 
   <div class="auth-section">
@@ -78,6 +79,30 @@
   <div id="profile-page" class="page-content hidden">
     <h2>My Profile</h2>
     <div id="profile-info"></div>
+  </div>
+
+  <div id="contact-page" class="page-content hidden">
+    <h2>Contact Us</h2>
+    <form id="contact-form">
+      <div class="form-field">
+        <label>Name</label>
+        <input type="text" id="contact-name" required>
+      </div>
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" id="contact-email" required>
+      </div>
+      <div class="form-field">
+        <label>Subject</label>
+        <input type="text" id="contact-subject" required>
+      </div>
+      <div class="form-field">
+        <label>Message</label>
+        <textarea id="contact-message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+    <div id="contact-success" class="hidden">Thank you! We'll get back to you soon.</div>
   </div>
 
   <div id="car-modal" class="modal hidden">

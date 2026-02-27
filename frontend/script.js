@@ -33,11 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const favoritesPage = document.getElementById("favorites-page");
   const comparePage = document.getElementById("compare-page");
   const profilePage = document.getElementById("profile-page");
+  const contactPage = document.getElementById("contact-page");
   const favoritesList = document.getElementById("favorites-list");
   const favoritesEmpty = document.getElementById("favorites-empty");
   const compareCarsList = document.getElementById("compare-cars-list");
   const comparisonTable = document.getElementById("comparison-table");
   const profileInfo = document.getElementById("profile-info");
+  const contactForm = document.getElementById("contact-form");
+  const contactSuccess = document.getElementById("contact-success");
 
   let carsData = [];
   let favorites = new Set(JSON.parse(localStorage.getItem('favorites') || '[]'));
@@ -59,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
         
-        [homePage, favoritesPage, comparePage, profilePage].forEach(p => p.classList.add('hidden'));
+        [homePage, favoritesPage, comparePage, profilePage, contactPage].forEach(p => p.classList.add('hidden'));
         
         if (page === 'home') {
           homePage.classList.remove('hidden');
@@ -72,6 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (page === 'profile') {
           profilePage.classList.remove('hidden');
           loadProfilePage();
+        } else if (page === 'contact') {
+          contactPage.classList.remove('hidden');
         }
       });
     });
@@ -220,6 +225,17 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
   }
+
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    contactForm.classList.add('hidden');
+    contactSuccess.classList.remove('hidden');
+    setTimeout(() => {
+      contactForm.reset();
+      contactForm.classList.remove('hidden');
+      contactSuccess.classList.add('hidden');
+    }, 3000);
+  });
 
   function checkAuthentication() {
     if (!token || !currentUser) {
@@ -429,7 +445,10 @@ document.addEventListener("DOMContentLoaded", () => {
       <p><strong>Price:</strong> KSh ${car.price.toLocaleString()}</p>
       <p><strong>Top Speed:</strong> ${car.topSpeed || 'N/A'} mph</p>
       <p><strong>Battery:</strong> ${car.battery || 'N/A'} kWh</p>
+      <p><strong>Acceleration (0-60):</strong> ${car.acceleration || 'N/A'} seconds</p>
+      <p><strong>Charging Time:</strong> ${car.chargingTime || 'N/A'}</p>
       <p><strong>Seats:</strong> ${car.seats || 'N/A'}</p>
+      <p><strong>Warranty:</strong> ${car.warranty || 'N/A'}</p>
       <p><strong>Description:</strong> ${car.description || 'No description available.'}</p>
       <button class="fav-btn" data-id="${car.id}">
         ${favorites.has(car.id) ? "Favorited" : "Add to Favorites"}

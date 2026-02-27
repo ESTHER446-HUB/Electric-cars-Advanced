@@ -39,12 +39,19 @@ h1 {
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
+  animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .car-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
 
 .car-img {
@@ -63,11 +70,17 @@ h1 {
   color: white;
   cursor: pointer;
   font-size: 14px;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
 }
 
 .fav-btn:hover {
   background-color: brown;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.fav-btn:active {
+  transform: scale(0.95);
 }
 
 #loading {
@@ -106,6 +119,12 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .modal.hidden {
@@ -132,6 +151,12 @@ h1 {
   overflow-y: auto;
   z-index: 1001;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .modal-close {
@@ -369,6 +394,75 @@ h1 {
 .page-content h2 {
   color: palevioletred;
   margin-bottom: 1rem;
+}
+
+/* Contact Form */
+#contact-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-field label {
+  display: block;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: palevioletred;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: transform 0.3s;
+}
+
+.submit-btn:hover {
+  transform: scale(1.02);
+}
+
+#contact-success {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: rgba(76, 175, 80, 0.2);
+  border: 1px solid #4CAF50;
+  border-radius: 8px;
+  color: #4CAF50;
+  font-size: 1.1rem;
+  text-align: center;
 }
 
 /* Responsive Design */
