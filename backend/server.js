@@ -6,6 +6,7 @@ const app = express();
 const carsRoutes = require('./routes/cars');
 const authRoutes = require('./routes/auth');
 const favoritesRoutes = require('./routes/favorites');
+const reviewsRoutes = require('./routes/reviews');
 
 app.use(cors({
   origin: process.env.FRONTEND_URL || '*',
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 app.use('/api/cars', carsRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/favorites', favoritesRoutes);
+app.use('/api/reviews', reviewsRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

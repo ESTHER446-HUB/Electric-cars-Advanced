@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const comparePage = document.getElementById("compare-page");
   const profilePage = document.getElementById("profile-page");
   const contactPage = document.getElementById("contact-page");
+  const paymentPage = document.getElementById("payment-page");
   const favoritesList = document.getElementById("favorites-list");
   const favoritesEmpty = document.getElementById("favorites-empty");
   const compareCarsList = document.getElementById("compare-cars-list");
@@ -62,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
         
-        [homePage, favoritesPage, comparePage, profilePage, contactPage].forEach(p => p.classList.add('hidden'));
+        [homePage, favoritesPage, comparePage, profilePage, contactPage, paymentPage].forEach(p => p.classList.add('hidden'));
         
         if (page === 'home') {
           homePage.classList.remove('hidden');
@@ -77,6 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
           loadProfilePage();
         } else if (page === 'contact') {
           contactPage.classList.remove('hidden');
+        } else if (page === 'payment') {
+          paymentPage.classList.remove('hidden');
         }
       });
     });
@@ -453,9 +456,29 @@ document.addEventListener("DOMContentLoaded", () => {
       <button class="fav-btn" data-id="${car.id}">
         ${favorites.has(car.id) ? "Favorited" : "Add to Favorites"}
       </button>
+      <div class="reviews-section">
+        <h3>Reviews & Ratings</h3>
+        <div id="reviews-list-${car.id}">Loading reviews...</div>
+        ${token ? `
+          <div class="add-review">
+            <h4>Add Your Review</h4>
+            <div class="star-rating">
+              <span class="star" data-rating="1">★</span>
+              <span class="star" data-rating="2">★</span>
+              <span class="star" data-rating="3">★</span>
+              <span class="star" data-rating="4">★</span>
+              <span class="star" data-rating="5">★</span>
+            </div>
+            <textarea id="review-comment" placeholder="Write your review..." rows="3"></textarea>
+            <button class="submit-review-btn" data-car-id="${car.id}">Submit Review</button>
+          </div>
+        ` : '<p>Login to add a review</p>'}
+      </div>
     `;
     
     modal.classList.remove('hidden');
+    loadReviews(car.id);
+    setupReviewStars();
   }
 
   async function loadFavoritesFromAPI() {
@@ -500,6 +523,84 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       authButtons.classList.remove('hidden');
       userInfo.classList.add('hidden');
+    }
+  }
+
+  let selectedRating = 0;
+
+  function setupReviewStars() {
+    const stars = document.querySelectorAll('.star');
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.dataset.rating);
+        stars.forEach((s, i) => {
+          s.style.color = i < selectedRating ? '#FFD700' : '#ddd';
+        });
+      });
+    });
+
+    const submitBtn = document.querySelector('.submit-review-btn');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', async () => {
+        const carId = submitBtn.dataset.carId;
+        const comment = document.getElementById('review-comment').value;
+        
+        if (selectedRating === 0) {
+          alert('Please select a rating');
+          return;
+        }
+
+        try {
+          await fetch(`${API_URL}/reviews/${carId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ rating: selectedRating, comment })
+          });
+          
+          selectedRating = 0;
+          document.getElementById('review-comment').value = '';
+          loadReviews(carId);
+        } catch (err) {
+          console.error('Error submitting review:', err);
+        }
+      });
+    }
+  }
+
+  async function loadReviews(carId) {
+    try {
+      const res = await fetch(`${API_URL}/reviews/${carId}`);
+      const reviews = await res.json();
+      
+      const avgRes = await fetch(`${API_URL}/reviews/${carId}/average`);
+      const { avgRating, totalReviews } = await avgRes.json();
+      
+      const reviewsList = document.getElementById(`reviews-list-${carId}`);
+      
+      if (reviews.length === 0) {
+        reviewsList.innerHTML = '<p>No reviews yet. Be the first to review!</p>';
+      } else {
+        let html = `<div class="avg-rating">Average: ${avgRating ? avgRating.toFixed(1) : 'N/A'} ★ (${totalReviews} reviews)</div>`;
+        reviews.forEach(review => {
+          const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+          html += `
+            <div class="review-item">
+              <div class="review-header">
+                <strong>${review.username}</strong>
+                <span class="review-stars">${stars}</span>
+              </div>
+              <p>${review.comment || 'No comment'}</p>
+              <small>${new Date(review.created_at).toLocaleDateString()}</small>
+            </div>
+          `;
+        });
+        reviewsList.innerHTML = html;
+      }
+    } catch (err) {
+      console.error('Error loading reviews:', err);
     }
   }
 });
